@@ -1,1 +1,1 @@
-# egg-hat
+# EggHat
