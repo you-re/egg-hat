@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2b3ukwfy68ch"]
+
+[ext_resource type="PackedScene" uid="uid://desex4sg730fr" path="res://Scenes/Player.tscn" id="1_ll1py"]
+[ext_resource type="Texture2D" uid="uid://qp65l3glvssh" path="res://Textures/Paper.jpg" id="2_7y2f2"]
+[ext_resource type="Texture2D" uid="uid://db6a8ed0f7xl2" path="res://Textures/Vine_tileable.png" id="3_anh38"]
+[ext_resource type="PackedScene" uid="uid://bhqem6cy6oqla" path="res://Scenes/Platform.tscn" id="4_5lf5d"]
+[ext_resource type="Script" path="res://Scripts/Camera2D.gd" id="4_fjgei"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_ll1py")]
+
+[node name="ParallaxLayer" type="ParallaxBackground" parent="."]
+offset = Vector2(-540, -960)
+transform = Transform2D(1, 0, 0, 1, -540, -960)
+
+[node name="BG" type="ParallaxLayer" parent="ParallaxLayer"]
+
+[node name="Paper" type="TextureRect" parent="ParallaxLayer/BG"]
+offset_left = -540.0
+offset_top = -540.0
+offset_right = 1620.0
+offset_bottom = 2460.0
+texture = ExtResource("2_7y2f2")
+expand_mode = 1
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Vine" type="ParallaxLayer" parent="ParallaxLayer"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxLayer/Vine"]
+offset_left = 235.0
+offset_top = -540.0
+offset_right = 2715.0
+offset_bottom = 11460.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_anh38")
+stretch_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_fjgei")
+player_path = NodePath("../Platform")
+
+[node name="Platform2" parent="." instance=ExtResource("4_5lf5d")]
+position = Vector2(2, -157)
+
+[node name="Platform" parent="." instance=ExtResource("4_5lf5d")]
+position = Vector2(0, 381)

@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://desex4sg730fr"]
+
+[ext_resource type="Texture2D" uid="uid://lipuc4733ri" path="res://Textures/Kevin_standingStill.png" id="1_fx1jc"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_ybybo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a6mw2"]
+radius = 38.0
+height = 128.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r4pej"]
+size = Vector2(64, 18)
+
+[node name="Player" type="RigidBody2D" groups=["Player"]]
+collision_mask = 2
+gravity_scale = 4.0
+script = ExtResource("1_ybybo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_fx1jc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 12)
+shape = SubResource("CapsuleShape2D_a6mw2")
+
+[node name="Collider" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Collider"]
+position = Vector2(0, 70)
+shape = SubResource("RectangleShape2D_r4pej")
+
+[connection signal="body_entered" from="Collider" to="." method="collision"]

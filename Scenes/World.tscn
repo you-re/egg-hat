@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://ctch5c1tv6v5y"]
+
+[ext_resource type="PackedScene" uid="uid://desex4sg730fr" path="res://Scenes/Player.tscn" id="1_ll1py"]
+[ext_resource type="Script" path="res://Scripts/PlatformSpawner.gd" id="1_wcrc4"]
+[ext_resource type="Texture2D" uid="uid://qp65l3glvssh" path="res://Textures/Paper.jpg" id="2_7y2f2"]
+[ext_resource type="Texture2D" uid="uid://db6a8ed0f7xl2" path="res://Textures/Vine_tileable.png" id="3_anh38"]
+[ext_resource type="Shader" path="res://Shaders/GradientBG.gdshader" id="3_bnqql"]
+[ext_resource type="Script" path="res://Scripts/Camera.gd" id="4_fjgei"]
+[ext_resource type="PackedScene" uid="uid://djxjp2d3cvmko" path="res://Scenes/Hat.tscn" id="5_wcl5r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7v6rh"]
+shader = ExtResource("3_bnqql")
+shader_parameter/col1 = Vector3(0, 0, 0)
+shader_parameter/col2 = Vector3(1, 1, 1)
+shader_parameter/alpha = 0.2
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_c57j2"]
+size = Vector2(1080, 1920)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_md1ls"]
+size = Vector2(1080, 1920)
+
+[node name="World" type="Node2D"]
+
+[node name="ParallaxLayer" type="ParallaxBackground" parent="."]
+scroll_ignore_camera_zoom = true
+
+[node name="PaperBG" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(0, 1600)
+
+[node name="Paper" type="TextureRect" parent="ParallaxLayer/PaperBG"]
+offset_left = -1080.0
+offset_top = -960.0
+offset_right = 1080.0
+offset_bottom = 2040.0
+size_flags_vertical = 3
+texture = ExtResource("2_7y2f2")
+expand_mode = 4
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D3" type="Sprite2D" parent="ParallaxLayer"]
+material = SubResource("ShaderMaterial_7v6rh")
+texture = SubResource("PlaceholderTexture2D_c57j2")
+offset = Vector2(540, 960)
+
+[node name="VineBG" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2(0.7, 0.7)
+motion_mirroring = Vector2(0, 3644.8)
+
+[node name="VineBG" type="TextureRect" parent="ParallaxLayer/VineBG"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -290.0
+offset_top = -960.0
+offset_right = 2190.0
+offset_bottom = 35488.0
+grow_horizontal = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_anh38")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer"]
+material = SubResource("ShaderMaterial_7v6rh")
+texture = SubResource("PlaceholderTexture2D_c57j2")
+offset = Vector2(540, 960)
+
+[node name="VineBG2" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(0, 3417)
+
+[node name="VineBG" type="TextureRect" parent="ParallaxLayer/VineBG2"]
+offset_left = 267.0
+offset_top = -960.0
+offset_right = 2747.0
+offset_bottom = 26376.0
+scale = Vector2(0.125, 0.125)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("3_anh38")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+material = SubResource("ShaderMaterial_7v6rh")
+texture = SubResource("PlaceholderTexture2D_md1ls")
+offset = Vector2(540, 960)
+
+[node name="Vine" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_mirroring = Vector2(0, 3417)
+
+[node name="MainVine" type="TextureRect" parent="ParallaxLayer/Vine"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -300.0
+offset_top = -960.0
+offset_right = 2180.0
+offset_bottom = 12708.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_anh38")
+stretch_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("4_fjgei")
+player_path = NodePath("../Player")
+
+[node name="Platforms" type="Node2D" parent="."]
+script = ExtResource("1_wcrc4")
+
+[node name="Hats" type="Node2D" parent="."]
+
+[node name="Hat" parent="Hats" instance=ExtResource("5_wcl5r")]
+position = Vector2(-2, 536)
+
+[node name="Player" parent="." instance=ExtResource("1_ll1py")]
+position = Vector2(0, 450)
+lock_rotation = true
+spawn_pos = Vector2(0, 420)
