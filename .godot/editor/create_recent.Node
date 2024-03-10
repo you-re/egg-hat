@@ -1,0 +1,14 @@
+Node2D
+SubViewport
+Sprite2D
+CanvasModulate
+TextureRect
+ColorRect
+Area2D
+CollisionShape2D
+StaticBody2D
+Node
+Camera2D
+ParallaxLayer
+ParallaxBackground
+RigidBody2D

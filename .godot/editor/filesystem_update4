@@ -1,0 +1,5 @@
+res://Scenes/Global Stuff.tscn
+res://Shaders/GradientBG.gdshader
+res://Scenes/Player.tscn
+res://Scenes/Platform.tscn
+res://Scenes/Hat.tscn
